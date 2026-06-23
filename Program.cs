@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AllAboutHeaps.Arrays;
 using AllAboutHeaps.BinarySearch;
+using AllAboutHeaps.HashSet;
 using AllAboutHeaps.Maths;
 using DSA.Arrays;
 using DSA.StacksAndQueues;
@@ -16,12 +17,9 @@ namespace AllAboutHeaps
 
         static void Main(string[] args)
         {
-            ProductOfArrayExceptSelf product = new ProductOfArrayExceptSelf();
-            var result = product.ProductExceptSelf(new int[] { 1, 2, 3, 4 });
-            Console.WriteLine("Product of Array Except Self: " + string.Join(", ", result));
-            TwoSum_Leetcode1 twoSum = new TwoSum_Leetcode1();
-            var ans = twoSum.TwoSum(new int[] { 2,7,11,15 }, 9);
-            Console.WriteLine("Indices are: " + ans[0] + ", " + ans[1]);
+           LongestConsecutiveSequence longestConsecutiveSequence = new LongestConsecutiveSequence();
+            var ans = longestConsecutiveSequence.LongestConsecutive(new int[] { 100,4,200,1,3,2 });
+            Console.WriteLine($"Answer is {ans}");
             Console.ReadLine();
         }
 
