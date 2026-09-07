@@ -5,29 +5,21 @@ namespace DSA.StacksAndQueues
 {
     public class AreaOfLargestRectangleInHistogram
     {
-        public AreaOfLargestRectangleInHistogram()
-        {
-        }
+        public AreaOfLargestRectangleInHistogram() { }
 
         public int LargestRectangleArea(int[] heights)
         {
-            //Find smaller to the left and to the right
-
-            //Step 1 (left smaller[] with indexes as values
-            int[] ls = new int[heights.Length];
-            CalculateLeftSmaller(heights, ls);
-
-            //Step 2 (right smaller with indexes as values
-            int[] rs = new int[heights.Length];
-            CalculateRightSmaller(heights, rs);
-
+            int len = heights.Length;
             int maxArea = 0;
-            for (int i = 0; i < heights.Length; i++)
+            var leftSmaller = new int[len];
+            var rightSmaller = new int[len];
+            CalculateLeftSmaller(heights, leftSmaller);
+            CalculateRightSmaller(heights, rightSmaller);
+            for (int i = 0; i < len; i++)
             {
-                int width = rs[i] - ls[i] - 1;
-                int tempArea = width * heights[i];
-                maxArea = Math.Max(maxArea, tempArea);
-
+                int width = rightSmaller[i] - leftSmaller[i] - 1;
+                int area = width * heights[i];
+                maxArea = Math.Max(maxArea, area);
             }
 
             return maxArea;
@@ -45,14 +37,7 @@ namespace DSA.StacksAndQueues
                 }
 
                 //Stack is empty, put -1 as index of left smaller
-                if (st.Count == 0)
-                {
-                    leftSmaller[i] = -1; // 
-                }
-                else
-                {
-                    leftSmaller[i] = st.Peek();// Don't remove the element, just record it's index
-                }
+                leftSmaller[i] = st.Count == 0 ? -1 : st.Peek();
 
                 st.Push(i);
             }
@@ -60,8 +45,8 @@ namespace DSA.StacksAndQueues
 
         public void CalculateRightSmaller(int[] heights, int[] rightSmaller)
         {
-            //  1key diff is If no element found smaller on Right, use last FICTIONAL element index at
-            // heights.Length + 1
+            //  1 key diff is If no element found smaller on Right, use last FICTIONAL element index at
+            // heights.Length
 
             Stack<int> st = new Stack<int>();
 
@@ -72,19 +57,10 @@ namespace DSA.StacksAndQueues
                     st.Pop();
                 }
 
+                rightSmaller[i] = st.Count == 0 ? heights.Length : st.Peek();
 
-                if (st.Count == 0)
-                {                   //index of last element  + 1
-                    rightSmaller[i] = (heights.Length - 1) + 1; // index of last element + 1
-                }
-                else
-                {
-                    rightSmaller[i] = st.Peek();
-
-                }
                 st.Push(i);
             }
         }
     }
 }
-

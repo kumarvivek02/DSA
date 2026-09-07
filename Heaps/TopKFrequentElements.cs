@@ -5,23 +5,15 @@ namespace AllAboutHeaps
 {
     public class TopKFrequentElements
     {
-        public TopKFrequentElements()
-        {
-        }
+        public TopKFrequentElements() { }
 
         public int[] TopKFrequent(int[] nums, int k)
         {
             var listOfNums = new List<int>();
 
-            PriorityQueue<int, int> priorityQueue = new PriorityQueue<int, int>(new CustomComparer());
-
-            PriorityQueue<int, int> pq = new PriorityQueue<int, int>();
-            for (int i = 0; i < 9; i++)
-            {
-                pq.Enqueue(i, i);
-            }
-
-            var top = pq.Dequeue();
+            PriorityQueue<int, int> priorityQueue = new PriorityQueue<int, int>(
+                new CustomComparer()
+            );
 
             Dictionary<int, int> keyValuePairs = new Dictionary<int, int>();
             for (int i = 0; i < nums.Length; i++)
@@ -52,12 +44,6 @@ namespace AllAboutHeaps
             }
 
             return listOfNums.ToArray();
-
         }
-
-
-
     }
-
-
 }

@@ -1,19 +1,20 @@
 ﻿using System;
+
 namespace DSA.StacksAndQueues
 {
     public class MyCircularQueue
     {
-
         int front, rear;
-        int size;
+        int capacity;
+        int currSize;
         int[] arr;
 
         public MyCircularQueue(int k)
         {
-
-            front = -1;
+            front = 0; // think of after 1 insert, if we pop, -1 as ini value will give exception for front
             rear = -1;
-            size = k;
+            capacity = k;
+            currSize = 0;
 
             arr = new int[k];
         }
@@ -21,23 +22,22 @@ namespace DSA.StacksAndQueues
         public bool EnQueue(int value)
         {
             //Check if array is full
-            if (IsFull()) return false;
+            if (IsFull())
+                return false;
 
-            //Special consideration when Enqueing 1st element
-            if (front == -1) front = 0;
-            rear = (rear + 1) % size;
+            rear = (rear + 1) % capacity;
             arr[rear] = value;
-
+            currSize++;
             return true;
         }
 
         public bool DeQueue()
         {
-            if (IsEmpty()) return false;
+            if (IsEmpty())
+                return false;
 
-            var result = arr[front];
-            if (front == rear) front = rear = -1;
-            else front = (front + 1) % size;
+            front = (front + 1) % capacity;
+            currSize--;
 
             return true;
         }
@@ -49,19 +49,17 @@ namespace DSA.StacksAndQueues
 
         public int Rear()
         {
-
             return IsEmpty() ? -1 : arr[rear];
         }
 
         public bool IsEmpty()
         {
-            return front == -1;
+            return currSize == 0;
         }
 
         public bool IsFull()
         {
-            return ((rear + 1) % size) == front;
+            return currSize == capacity;
         }
     }
 }
-

@@ -4,6 +4,8 @@ using AllAboutHeaps.Arrays;
 using AllAboutHeaps.BinarySearch;
 using AllAboutHeaps.HashSet;
 using AllAboutHeaps.Maths;
+using AllAboutHeaps.StacksAndQueues;
+using AllAboutHeaps.Strings;
 using DSA.Arrays;
 using DSA.StacksAndQueues;
 using DSA.Strings;
@@ -17,9 +19,8 @@ namespace AllAboutHeaps
 
         static void Main(string[] args)
         {
-           LongestConsecutiveSequence longestConsecutiveSequence = new LongestConsecutiveSequence();
-            var ans = longestConsecutiveSequence.LongestConsecutive(new int[] { 100,4,200,1,3,2 });
-            Console.WriteLine($"Answer is {ans}");
+            Solution solution = new Solution();
+            var ans = solution.FinalPrices(new int[] { 8, 4, 6, 2, 3 });
             Console.ReadLine();
         }
 
@@ -42,9 +43,7 @@ namespace AllAboutHeaps
             }
 
             return null;
-
         }
-
     }
 
     public class ArrayComparer : IComparer<int[]>
@@ -63,10 +62,8 @@ namespace AllAboutHeaps
         }
     }
 
-
     public class Node
     {
-
         public int val;
         public Node left;
         public Node right;
@@ -86,7 +83,6 @@ namespace AllAboutHeaps
             right = _right;
             next = _next;
         }
-
     }
 
     public class TreeNode
@@ -94,6 +90,7 @@ namespace AllAboutHeaps
         public int val;
         public TreeNode left;
         public TreeNode right;
+
         public TreeNode(int Val = 0, TreeNode left = null, TreeNode right = null)
         {
             val = Val;
@@ -102,4 +99,3 @@ namespace AllAboutHeaps
         }
     }
 }
-

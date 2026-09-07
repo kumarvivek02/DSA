@@ -3,12 +3,38 @@ using System.Collections.Generic;
 
 namespace AllAboutHeaps.StacksAndQueues
 {
-    public class NextGreaterElementToRight
+    public class NextGreaterElementToRight_LeetcodeQ
     {
-        public NextGreaterElementToRight()
+        //Variation 1 : Plain NextGreaterElementLogic, 1 input array provided
+        //eg i/p:[6,8,0,1,3]
+        //expected o/p:[8,-1,1,3,-1]
+        public int[] NextGreaterElement(int[] nums)
         {
+            var size = nums.Length;
+            var st = new Stack<int>();
+            var ans = new int[size];
+            //Going R -> L
+            for (int i = size - 1; i >= 0; i--)
+            {
+                //for each element, look through Stack to find next greater
+                while(st.Count>0 && st.Peek() < nums[i])
+                {
+                    st.Pop();
+                }
+
+                //Once we've popped all smaller elements, 2 possible outcome
+
+                //Stack is empty
+                if(st.Count == 0) ans[i] = -1;
+                else ans[i] = st.Peek();
+
+                st.Push(nums[i]);
+            }
+
+            return ans;
         }
 
+        //Variation 2 : From LC, 2 input arrays provided
         public int[] NextGreaterElement(int[] nums1, int[] nums2)
         {
             int[] res = new int[nums1.Length];
@@ -19,7 +45,6 @@ namespace AllAboutHeaps.StacksAndQueues
                 res[i] = dict1[nums1[i]];
             }
             return res;
-
         }
 
         public Dictionary<int, int> NextGreaterElementToTheRight(int[] nums2)
@@ -38,7 +63,8 @@ namespace AllAboutHeaps.StacksAndQueues
 
                 //After the while loop above, either Stack is Empty, in which case NGR is -1
                 // OR you've found NGR at s.Peek()
-                if (s.Count == 0) dict.Add(nums2[i], -1);
+                if (s.Count == 0)
+                    dict.Add(nums2[i], -1);
                 else
                 {
                     dict.Add(nums2[i], s.Peek());
@@ -51,4 +77,3 @@ namespace AllAboutHeaps.StacksAndQueues
         }
     }
 }
-
